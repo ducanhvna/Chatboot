@@ -1,0 +1,25 @@
+language: python
+python:
+  - "3.6"
+services: mysql
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE = "chatboot.settings"
+    - PYTHONPATH="/home/travis/build/chatboot/chatboot"
+    - PIP_USE_MIRRORS=true
+  matrix:
+    - DJANGO=2.0.13 DB=mysql
+#commands to install dependences
+install:
+  - pip install -q -r requirements.txt
+
+before_script:
+  - mysql -e 'create database travis_ci_db;'
+  - python manage.py makemigrations
+  - python manage.py migrate
+
+# command to run the test suite
+
+script: 
+  -python manage.py test
