@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'chatboot.wsgi.application'
 #     }
 # }
 
-if os.getenv('BUILD_ON_TRAVIS', None):
+if os.getenv('TRAVIS', None):
     DEBUG = False
     TEMPLATE_DEBUG = True
     DATABASES = {
@@ -93,22 +93,22 @@ if os.getenv('BUILD_ON_TRAVIS', None):
         }
     }
 else:
-    # DATABASES = {
-    #     'default':{
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': 'my-app-db',
-    #         'USER': 'root',
-    #         'PASSWORD': 'password',
-    #         'HOST':'db',
-    #         'PORT': 3306
-    #     }
-    # }
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'default':{
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'my-app-db',
+            'USER': 'root',
+            'PASSWORD': 'password',
+            'HOST':'db',
+            'PORT': 3306
         }
-    } 
+    }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     }
+    # } 
 
 
 # Password validation
